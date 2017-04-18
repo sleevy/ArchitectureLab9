@@ -3,6 +3,7 @@ package edu.georgiasouthern.cr04956.architecturelab9;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -34,7 +35,7 @@ public class TextActivity extends AppCompatActivity {
             "Trees sprout up just about everywhere in computer science.";
 
     private File quoteFile;
-    private static final String QUOTE_DIRECTORY = "Quotes";
+//    private static final String QUOTE_DIRECTORY = "Quotes";
     private static final String QUOTE_FILE_NAME = "knuthQuotes.txt";
 
     @Override
@@ -42,17 +43,22 @@ public class TextActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text);
 
-        File quoteDirectory = new File(Environment.getExternalStorageDirectory(), QUOTE_DIRECTORY);
-        if(!quoteDirectory.exists()) {
-            if(quoteDirectory.mkdirs()) {
-                Toast.makeText(this, "Directory Created", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Directory Creation Failed", Toast.LENGTH_SHORT).show();
-            }
-        }
-
+//        File quoteDirectory = new File(getExternalFilesDir(null), QUOTE_DIRECTORY);
+//        if(!quoteDirectory.exists()) {
+//            if(quoteDirectory.mkdirs()) {
+//                Toast.makeText(this, "Directory Created", Toast.LENGTH_SHORT).show();
+//            } else {
+//                Toast.makeText(this, "Directory Creation Failed", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+        File quoteDirectory = getExternalFilesDir(null);
         quoteFile = new File(quoteDirectory, QUOTE_FILE_NAME);
-
+        if(!quoteFile.exists()) {
+            writeFile();
+        }
+        String text = readFile();
+        TextView txtView = (TextView) findViewById(R.id.txtQuote);
+        txtView.setText(text);
     }
 
     public void writeFile() {
@@ -105,7 +111,7 @@ public class TextActivity extends AppCompatActivity {
 
 //    public boolean quoteFileExists() {
 //        boolean exists = false;
-//        //TODO: implement checking
+//
 //
 //        return exists;
 //    }
