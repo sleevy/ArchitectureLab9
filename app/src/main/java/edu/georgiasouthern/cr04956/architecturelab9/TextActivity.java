@@ -5,9 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
@@ -50,14 +56,14 @@ public class TextActivity extends AppCompatActivity {
     }
 
     public void writeFile() {
-        if(quoteFileExists()) {
-            Toast.makeText(this, "File already exists.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        //TODO: implement writing
+//        if(quoteFileExists()) {
+//            Toast.makeText(this, "File already exists.", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+
         try {
-            FileWriter writer = new FileWriter(quoteFile);
-            writer.append(QUOTE_TEXT);
+            FileWriter writer = new FileWriter(quoteFile, false);
+            writer.write(QUOTE_TEXT);
             writer.flush();
             writer.close();
             Toast.makeText(this, "Quote file written successfully", Toast.LENGTH_SHORT).show();
@@ -70,18 +76,38 @@ public class TextActivity extends AppCompatActivity {
     }
 
     public String readFile() {
+//        if(!quoteFileExists()) {
+//            writeFile();
+//        }
+
         String fileContents = "";
-        //TODO: implement reading
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(quoteFile)));
+            StringBuilder builder = new StringBuilder();
+            String content = "";
+            while((content = reader.readLine()) != null) {
+                builder.append(content);
+            }
+            fileContents = builder.toString();
+            reader.close();
+        }
+        catch(FileNotFoundException fnfe) {
+            fnfe.printStackTrace();
+            Toast.makeText(this, "File not found", Toast.LENGTH_SHORT).show();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+
+        }
 
 
         return fileContents;
     }
 
-    public boolean quoteFileExists() {
-        boolean exists = false;
-        //TODO: implement checking
-
-        return exists;
-    }
+//    public boolean quoteFileExists() {
+//        boolean exists = false;
+//        //TODO: implement checking
+//
+//        return exists;
+//    }
 
 }
