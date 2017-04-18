@@ -93,6 +93,7 @@ public class TextActivity extends AppCompatActivity {
             String content = "";
             while((content = reader.readLine()) != null) {
                 builder.append(content);
+                builder.append("\n");
             }
             fileContents = builder.toString();
             reader.close();
