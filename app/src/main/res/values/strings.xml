@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ArchitectureLab9</string>
+    <string name="text">Text</string>
+    <string name="sql">SQL</string>
 </resources>
