@@ -48,9 +48,6 @@ public class SQLActivity extends AppCompatActivity {
             }
         });
 
-        //TODO: ensure creation of database
-
-        //TODO: add data into database
 
     }
 
@@ -186,4 +183,9 @@ public class SQLActivity extends AppCompatActivity {
         cursor.close();
     }
 
+    @Override
+    protected void onDestroy() {
+        helper.close();
+        super.onDestroy();
+    }
 }
