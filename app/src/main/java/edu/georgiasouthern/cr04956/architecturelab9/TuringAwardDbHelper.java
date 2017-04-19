@@ -44,4 +44,12 @@ public class TuringAwardDbHelper extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }
+
+    public void dropTable(SQLiteDatabase db) {
+        db.execSQL(SQL_DELETE_ENTRIES);
+    }
+
+    public void recreateTable(SQLiteDatabase db) {
+        db.execSQL(SQL_CREATE_ENTRIES);
+    }
 }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -25,6 +26,10 @@ public class SQLActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sql);
 
         helper = new TuringAwardDbHelper(this);
+        helper.dropTable(helper.getWritableDatabase());
+        helper.recreateTable(helper.getWritableDatabase());
+        addEntriesToDatabase();
+
         outputView = (TextView) findViewById(R.id.txtOutput);
 
         Button allButton = (Button) findViewById(R.id.btnAll);
@@ -51,6 +56,7 @@ public class SQLActivity extends AppCompatActivity {
 
     public void addEntriesToDatabase() {
         SQLiteDatabase db = helper.getWritableDatabase();
+        Toast.makeText(this, "Adding entries", Toast.LENGTH_SHORT).show();
         for(AwardWinner winner : AwardWinner.values()) {
 
             ContentValues values = new ContentValues();
@@ -63,6 +69,7 @@ public class SQLActivity extends AppCompatActivity {
 
             long newRowId = db.insert(AwardEntry.TABLE_NAME, null, values);
         }
+        Toast.makeText(this, "Entries added", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -72,7 +79,6 @@ public class SQLActivity extends AppCompatActivity {
                 AwardEntry.COLUMN_NAME_CITATION,
                 AwardEntry.COLUMN_NAME_SCHOOL,
                 AwardEntry.COLUMN_NANE_NAME,
-                AwardEntry.COLUMN_NAME_ALIVE,
                 AwardEntry.COLUMN_NAME_YEAR
         };
         String selection = AwardEntry.COLUMN_NAME_ALIVE + " = ?";
@@ -94,23 +100,23 @@ public class SQLActivity extends AppCompatActivity {
             String name = cursor.getString(cursor.getColumnIndexOrThrow(AwardEntry.COLUMN_NANE_NAME));
             builder.append("Name: ");
             builder.append(name); //name
-            builder.append(" ");
+            builder.append(", ");
 
             int year = cursor.getInt(cursor.getColumnIndexOrThrow(AwardEntry.COLUMN_NAME_YEAR));
             builder.append("Year: ");
             builder.append(year); //year
-            builder.append(" ");
+            builder.append(", ");
 
-            int aliveInt = cursor.getInt(cursor.getColumnIndexOrThrow(AwardEntry.COLUMN_NAME_ALIVE));
-            boolean isAlive = (aliveInt == 1);
-            builder.append("Is Alive: ");
-            builder.append(isAlive ? "Yes":"No"); //alive is 0 or 1
-            builder.append(" ");
+//            int aliveInt = cursor.getInt(cursor.getColumnIndexOrThrow(AwardEntry.COLUMN_NAME_ALIVE));
+//            boolean isAlive = (aliveInt == 1);
+//            builder.append("Is Alive: ");
+//            builder.append(isAlive ? "Yes":"No"); //alive is 0 or 1
+//            builder.append(" ");
 
             String school = cursor.getString(cursor.getColumnIndexOrThrow(AwardEntry.COLUMN_NAME_SCHOOL));
             builder.append("School: ");
             builder.append(school); //school
-            builder.append(" ");
+            builder.append(", ");
 
             String citation = cursor.getString(cursor.getColumnIndexOrThrow(AwardEntry.COLUMN_NAME_CITATION));
             builder.append("Citation: ");
@@ -151,23 +157,23 @@ public class SQLActivity extends AppCompatActivity {
             String name = cursor.getString(cursor.getColumnIndexOrThrow(AwardEntry.COLUMN_NANE_NAME));
             builder.append("Name: ");
             builder.append(name); //name
-            builder.append(" ");
+            builder.append(", ");
 
             int year = cursor.getInt(cursor.getColumnIndexOrThrow(AwardEntry.COLUMN_NAME_YEAR));
             builder.append("Year: ");
             builder.append(year); //year
-            builder.append(" ");
+            builder.append(", ");
 
             int aliveInt = cursor.getInt(cursor.getColumnIndexOrThrow(AwardEntry.COLUMN_NAME_ALIVE));
             boolean isAlive = (aliveInt == 1);
             builder.append("Is Alive: ");
             builder.append(isAlive ? "Yes":"No"); //alive is 0 or 1
-            builder.append(" ");
+            builder.append(", ");
 
             String school = cursor.getString(cursor.getColumnIndexOrThrow(AwardEntry.COLUMN_NAME_SCHOOL));
             builder.append("School: ");
             builder.append(school); //school
-            builder.append(" ");
+            builder.append(", ");
 
             String citation = cursor.getString(cursor.getColumnIndexOrThrow(AwardEntry.COLUMN_NAME_CITATION));
             builder.append("Citation: ");
