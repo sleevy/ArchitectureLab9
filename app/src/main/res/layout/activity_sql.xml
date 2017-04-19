@@ -1,44 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.georgiasouthern.cr04956.architecturelab9.SQLActivity">
+    tools:context="edu.georgiasouthern.cr04956.architecturelab9.SQLActivity"
+    android:orientation="vertical"
+    android:layout_weight="1">
 
-    <Button
-        android:id="@+id/btnAlive"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Alive"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnAlive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:text="Alive"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:text="All"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_weight="1"
         android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAlive">
+        app:layout_constraintRight_toRightOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtOutput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="0dp"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:text="TextView"
                 android:textAlignment="center"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -46,14 +69,4 @@
                 app:layout_constraintTop_toBottomOf="@+id/btnAlive" />
         </LinearLayout>
     </ScrollView>
-
-    <Button
-        android:id="@+id/btnAll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:text="All"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

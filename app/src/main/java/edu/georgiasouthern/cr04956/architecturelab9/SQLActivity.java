@@ -119,7 +119,7 @@ public class SQLActivity extends AppCompatActivity {
             builder.append("Citation: ");
             builder.append(citation); //citation
 
-            builder.append("\n"); //newline
+            builder.append("\n\n"); //newline
         }
 
         outputView.setText(builder.toString());
@@ -176,7 +176,7 @@ public class SQLActivity extends AppCompatActivity {
             builder.append("Citation: ");
             builder.append(citation); //citation
 
-            builder.append("\n"); //newline
+            builder.append("\n\n"); //newline
         }
 
         outputView.setText(builder.toString());
